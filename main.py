@@ -38,6 +38,11 @@ def process(neg,pos,neutre,success,path):
     .neg-3{background: rgb(255, 120, 120)}
     .neg-2{background: rgb(255, 180, 180)}
     .neg-1{background: rgb(255, 220, 220)}
+    .pos-5{background: rgb(0, 255, 0)}
+    .pos-4{background: rgb(60, 255, 60)}
+    .pos-3{background: rgb(120, 255, 120)}
+    .pos-2{background: rgb(180, 255, 180)}
+    .pos-1{background: rgb(220, 255, 220)}
     '''
 
     for f in success:
@@ -65,16 +70,13 @@ def process(neg,pos,neutre,success,path):
             find = re.findall(r"\b"+n[0]+r"\b", data ,flags=re.IGNORECASE)
 
             for fi in find:
-                match = re.subn(r'\b'+fi+r'\b', '<span class="neg+'+str(n[1])+'">'+fi+'</span>', data,flags=re.IGNORECASE)
+                match = re.subn(r'\b'+fi+r'\b', '<span class="pos-'+str(n[1])+'">'+fi+'</span>', data,flags=re.IGNORECASE)
                 data = match[0]
                 print(n,match[1])
 
         file.close()
-
         file = open(join(path,f), 'wt')
-
         file.write(data+lettre)
-
         file.close()
 
 
@@ -82,11 +84,12 @@ if __name__ == '__main__':
 
     pathDir = "dossier"
     pathHTML = "export"
+
     negFile = open('input/negatif.txt', 'r')
     posFile = open('input/positif.txt', 'r')
     neutreFile = open('input/blue.txt','r')
 
-    neg = [[r''+f.split('\t')[0], int(f.split("\t")[1])] for f in negFile.readlines()]
+    neg = [[f.split('\t')[0], int(f.split("\t")[1])] for f in negFile.readlines()]
     pos = [[f.split('\t')[0], int(f.split("\t")[1])] for f in posFile.readlines()]
     neutre = [[f.split('\t')[0], int(f.split("\t")[1])] for f in neutreFile.readlines()]
 
