@@ -1,0 +1,59 @@
+actif	3
+active	5
+agréable	0
+amélioration	4
+appliqué	1
+appréciable	4
+attentif	3
+bon	0
+Bon	1
+Bonne	5
+bonne	1
+bonne volonté	5
+calme	2
+capacités	1
+compliments	2
+Compliments	3
+comportement exemplaire	2
+comportement sérieux	5
+de réels progrès	1
+décevant	4
+dynamique	1
+efficace	3
+élève sérieux	0
+en hausse	0
+encouragements	3
+Ensemble correct	3
+ensemble correct	1
+enthousiasme	1
+excellent	0
+Excellent	5
+félicitations	0
+Félicitations	3
+homogène	4
+implication	2
+intéressé	3
+irréprochable	5
+la motivation	1
+mature	0
+méthodique	4
+moteur	0
+motivé	2
+persévérant	3
+pertinent	4
+positif	4
+positive	1
+progrès	4
+qualité	3
+rigueur	3
+satisfaisant	0
+sérieuse	0
+sérieux	4
+studieuse	5
+studieux	5
+travail sérieux	0
+travailleur	2
+travailleuse	4
+Très bon	5
+très bon	5
+volontaire	2

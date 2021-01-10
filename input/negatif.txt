@@ -1,0 +1,99 @@
+à approfondir	-3
+abandonner	-2
+abscence	-5
+absent	-1
+agitation	-2
+amusement	-1
+attention	-4
+aucun	-4
+avertissement	-4
+baisse	-5
+baisses	-4
+baisser	-4
+bavard	-5
+bavardages	-1
+bavarde	-2
+bavarder	-2
+canalise	-3
+catastrophique	-3
+concentre	0
+concentré	-2
+concentrée	-5
+concentrer	-5
+contrasté	-3
+davantage	-4
+décevant	0
+déconcentrer	-1
+démission	0
+déraper	0
+désagréable	-1
+désinvolture	-5
+désirer	-1
+difficultés	-1
+discussion	-5
+discute	-5
+discuter	-5
+dispersé	0
+disperser	0
+dissipé	0
+dissipation	-4
+distraction	-4
+distrait	-4
+distraire	-4
+divertissement	-1
+doit s'investir	-3
+dommage	-1
+dormir	-3
+dort	-4
+empêche	-4
+en chute	-2
+en dents de scie	-2
+en-deçà	-1
+être plus attentif	-1
+fragile	-4
+fragilités	-1
+hétérogène	0
+il faut réagir	0
+inacceptable	-1
+inquiétant	-2
+insuffisant	-1
+insuffisants	-2
+insupportable	-5
+intensifie	-1
+intensifier	-3
+irrégulier	-1
+juste	-5
+justes	0
+lacunes	-4
+manque	-4
+mise en garde	-5
+moyen	-1
+ne respecte pas	-3
+négatif	-1
+négative	-5
+négliger	0
+nonchalance	-1
+nuisent	-3
+pas de travail	-2
+perte de motivation	-5
+peu motivé	-5
+pitre	0
+plus attentif	-3
+problèmes	-5
+puérile	-3
+réagir	-5
+regrettable	0
+relâchement	-3
+relâchez	-2
+résultats catastropiques	-2
+résultats contrastés	0
+résultats fragiles	-2
+résultats inquiétants	-5
+résultats insuffisants	-5
+sans vous disperser	-3
+se concentrer davantage	-4
+s'impliquer	-4
+s'investir davantage	-5
+travail superficiel	0
+travailler davantage	-2
+très insuffisant	-1

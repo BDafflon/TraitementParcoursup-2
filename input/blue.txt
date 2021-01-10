@@ -1,0 +1,6 @@
+l'attitude	0
+investissement 	0
+comportement	0
+concentration	0
+investissement	0
+investir	0
