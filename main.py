@@ -48,13 +48,24 @@ def process(neg,pos,neutre,success,path):
         data = content.split('Projet de formation motivé')[0]
         print(data)
         lettre = 'Projet de formation motivé'+'Projet de formation motivé'.join(content.split('Projet de formation motivé')[1:])
+
         for i,n in enumerate(neg):
 
-
-            find = re.findall(r"\b"+n+"\w*\b", data ,flags=re.IGNORECASE)
+            print(n)
+            find = re.findall(r"\b"+n[0]+r"\b", data ,flags=re.IGNORECASE)
 
             for fi in find:
-                match = re.subn(r'\b'+fi+r'\b', '<span class="neg'+str(n[1])+'">'+fi+'</span>', data,flags=re.IGNORECASE)
+                match = re.subn(r'\b'+fi+r'\b', '<span class="neg-'+str(n[1])+'">'+fi+'</span>', data,flags=re.IGNORECASE)
+                data = match[0]
+                print(n,match[1])
+
+        for i,n in enumerate(pos):
+
+            print(n)
+            find = re.findall(r"\b"+n[0]+r"\b", data ,flags=re.IGNORECASE)
+
+            for fi in find:
+                match = re.subn(r'\b'+fi+r'\b', '<span class="neg+'+str(n[1])+'">'+fi+'</span>', data,flags=re.IGNORECASE)
                 data = match[0]
                 print(n,match[1])
 
@@ -75,7 +86,7 @@ if __name__ == '__main__':
     posFile = open('input/positif.txt', 'r')
     neutreFile = open('input/blue.txt','r')
 
-    neg = [[f.split('\t')[0], int(f.split("\t")[1])] for f in negFile.readlines()]
+    neg = [[r''+f.split('\t')[0], int(f.split("\t")[1])] for f in negFile.readlines()]
     pos = [[f.split('\t')[0], int(f.split("\t")[1])] for f in posFile.readlines()]
     neutre = [[f.split('\t')[0], int(f.split("\t")[1])] for f in neutreFile.readlines()]
 

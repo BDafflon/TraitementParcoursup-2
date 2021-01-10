@@ -1,99 +1,101 @@
-à approfondir	-3
-abandonner	-2
-abscence	-5
-absent	-1
-agitation	-2
-amusement	-1
-attention	-4
-aucun	-4
-avertissement	-4
-baisse	-5
-baisses	-4
-baisser	-4
-bavard	-5
-bavardages	-1
-bavarde	-2
-bavarder	-2
-canalise	-3
-catastrophique	-3
-concentre	0
-concentré	-2
-concentrée	-5
-concentrer	-5
-contrasté	-3
-davantage	-4
-décevant	0
-déconcentrer	-1
-démission	0
-déraper	0
-désagréable	-1
-désinvolture	-5
-désirer	-1
-difficultés	-1
-discussion	-5
-discute	-5
-discuter	-5
-dispersé	0
-disperser	0
-dissipé	0
-dissipation	-4
-distraction	-4
-distrait	-4
-distraire	-4
-divertissement	-1
-doit s'investir	-3
-dommage	-1
-dormir	-3
-dort	-4
-empêche	-4
-en chute	-2
-en dents de scie	-2
-en-deçà	-1
-être plus attentif	-1
-fragile	-4
-fragilités	-1
-hétérogène	0
-il faut réagir	0
-inacceptable	-1
-inquiétant	-2
-insuffisant	-1
-insuffisants	-2
-insupportable	-5
-intensifie	-1
-intensifier	-3
-irrégulier	-1
-juste	-5
-justes	0
-lacunes	-4
-manque	-4
-mise en garde	-5
-moyen	-1
-ne respecte pas	-3
-négatif	-1
-négative	-5
-négliger	0
-nonchalance	-1
-nuisent	-3
-pas de travail	-2
-perte de motivation	-5
-peu motivé	-5
-pitre	0
-plus attentif	-3
-problèmes	-5
-puérile	-3
-réagir	-5
-regrettable	0
-relâchement	-3
-relâchez	-2
-résultats catastropiques	-2
-résultats contrastés	0
-résultats fragiles	-2
-résultats inquiétants	-5
-résultats insuffisants	-5
-sans vous disperser	-3
-se concentrer davantage	-4
-s'impliquer	-4
-s'investir davantage	-5
-travail superficiel	0
-travailler davantage	-2
-très insuffisant	-1
+à approfondir	1
+à revoir	2
+abandonner	2
+abscence[^ ]?	4
+absent\w*	4
+agité[^ ]?[^ ]?	5
+agitation[^ ]?	5
+amusement[^ ]?	5
+attention	1
+aucun	1
+avertissement[^ ]?	5
+baisse\w*	1
+bavard\w*	4
+canalise[^ ]?	2
+catastrophique	4
+concentr\w*	2
+contrasté\w*	1
+davantage	1
+décevant[^ ]?	2
+décontracté[^ ]?	4
+déconcentr\w*	3
+démission	3
+déraper	4
+désagréable	4
+désinvolt\w*	5
+désirer	2
+doi[^ ]	1
+devez	1
+difficultés	1
+dilletant[^ ]?	5
+discussion[^ ]?	3
+discute[^ ]?	3
+dispers\w*	4
+dissipé[^ ]?	5
+dissipation	5
+distraction[^ ]?	5
+distrai\w*	5
+divertissement[^ ]?	5
+doit s'investir	1
+dommage	1
+dormir	5
+dort	5
+empêche\w*	1
+en chute	2
+en dents de scie	1
+en-deçà	1
+être plus attentif	4
+fragile[^ ]?	1
+fragilité[^ ]?	1
+hétérogène	1
+il faut réagir	3
+indispensable[^ ]?	3
+impérativement	3
+inadapté[^ ]?[^ ]?	5
+inacceptable[^ ]?	5
+inquiétant[^ ]?[^ ]?	3
+insolen\w*	5
+insuffisant\w*	3
+insupportable	5
+intensifie	2
+intensifier	2
+irrégulier\w*	2
+juste\w*	1
+lacune[^ ]?	1
+manque	1
+manque de travail	3
+mise en garde	4
+moyen	1
+ne respecte pas	3
+n'est pas	1
+ne sont pas	1
+négati\w*	1
+néglige\w*	2
+nonchalance	5
+nuisent	3
+pas de travail	5
+perte de motivation	3
+peu motivé[^ ]?	3
+pénible[^ ]?	5
+pitre	5
+plus attentif	3
+problème[^ ]?	2
+puérile[^ ]?	5
+réagir	3
+regrettable	3
+relâch\w*	3
+relach\w*	3
+résultats catastrophiques	5
+résultats contrastés	2
+résultats fragiles	1
+résultats inquiétants	3
+résultats insuffisants	3
+sans vous disperser	5
+se ressaisir	3
+se concentrer davantage	3
+superficiel\w*	2
+s'implique\w*	2
+s'investir davantage	2
+travail superficiel	3
+travailler davantage	3
+très insuffisant[^ ]?	3

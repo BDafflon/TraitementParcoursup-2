@@ -1,59 +1,54 @@
+a su	2
 actif	3
-active	5
-agréable	0
-amélioration	4
-appliqué	1
-appréciable	4
+active	3
+agréable[^ ]?	2
+amélioration	2
+appliqué[^ ]?	3
+appréciable	3
 attentif	3
-bon	0
-Bon	1
-Bonne	5
-bonne	1
-bonne volonté	5
-calme	2
-capacités	1
-compliments	2
-Compliments	3
-comportement exemplaire	2
-comportement sérieux	5
-de réels progrès	1
-décevant	4
-dynamique	1
-efficace	3
-élève sérieux	0
-en hausse	0
-encouragements	3
-Ensemble correct	3
-ensemble correct	1
-enthousiasme	1
-excellent	0
-Excellent	5
-félicitations	0
-Félicitations	3
-homogène	4
-implication	2
-intéressé	3
-irréprochable	5
-la motivation	1
-mature	0
-méthodique	4
-moteur	0
-motivé	2
-persévérant	3
-pertinent	4
-positif	4
-positive	1
-progrès	4
-qualité	3
-rigueur	3
-satisfaisant	0
-sérieuse	0
-sérieux	4
-studieuse	5
-studieux	5
-travail sérieux	0
-travailleur	2
-travailleuse	4
-Très bon	5
-très bon	5
-volontaire	2
+attentive	3
+bon[^ ]?[^ ]?[^ ]?	3
+bonne volonté	3
+calme[^ ]?	2
+capacité[^ ]?	1
+compliments	4
+comportement exemplaire	4
+comportement sérieux	4
+continu\w*	2
+convenable[^ ]?	2
+de réels progrès	2
+dynamique	2
+efficace	2
+élève sérieux	3
+en hausse	2
+encouragement[^ ]?	4
+ensemble correct	2
+enthousiasme	2
+excellent[^ ]?[^ ]?	4
+félicitons	5
+félicitations	5
+FELICITATIONS	5
+homogène[^ ]?	2
+intéressé[^ ]?	3
+irréprochable	3
+mature	3
+méthodique	2
+moteur	4
+motrice	4
+motivé[^ ]?	1
+persévérant[^ ]?	1
+pertinent[^ ]?[^ ]?	1
+positi[^ ]?[^ ]?	3
+progrès	1
+qualité[^ ]?	2
+satisfaisant[^ ]?[^ ]?	3
+sérieuse	3
+sérieux	3
+studieuse	3
+studieux	3
+Tableau d'honneur	4
+travail sérieux	3
+travailleu[^ ][^ ]?	3
+très bon	4
+volontaire	3
+vos efforts	1
