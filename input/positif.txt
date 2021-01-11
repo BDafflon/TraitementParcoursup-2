@@ -7,7 +7,6 @@ appliqué[^ ]?	3
 appréciable	3
 attentif	3
 attentive	3
-bon[^ ]?[^ ]?[^ ]?	3
 bonne volonté	3
 calme[^ ]?	2
 capacité[^ ]?	1

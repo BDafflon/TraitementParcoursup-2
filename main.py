@@ -47,7 +47,7 @@ def process(neg,pos,neutre,success,path):
 
     for f in success:
         print(join(path,f))
-        file = open(join(path,f), 'r')
+        file = open(join(path,f),mode='r')
         doc = file.read()
 
         content = doc.split('<body>')[1]
@@ -56,33 +56,33 @@ def process(neg,pos,neutre,success,path):
         head = re.sub(r'<style type="text/css">', css, head)
 
 
-        buletin = content.split('Projet de formation motivé')[0]
+        buletin = content.split('Projet de formation motiv')[0]
+
         print(buletin)
-        lettre = 'Projet de formation motivé'+'Projet de formation motivé'.join(content.split('Projet de formation motivé')[1:])
+        lettre = 'Projet de formation motiv'+'Projet de formation motiv'.join(content.split('Projet de formation motiv')[1:])
 
         for i,n in enumerate(neg):
 
-            print(n)
             find = re.findall(r"\b"+n[0]+r"\b", buletin ,flags=re.IGNORECASE)
 
             for fi in find:
                 match = re.subn(r'\b'+fi+r'\b', '<span class="neg-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
                 buletin = match[0]
-                print(n,match[1])
+
 
         for i,n in enumerate(pos):
 
-            print(n)
             find = re.findall(r"\b"+n[0]+r"\b", buletin ,flags=re.IGNORECASE)
 
             for fi in find:
                 match = re.subn(r'\b'+fi+r'\b', '<span class="pos-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
                 buletin = match[0]
-                print(fi,match[1])
+
 
         file.close()
-        file = open(join(path,f), 'wt')
-        file.write(head+'<body>'+buletin+lettre)
+        file = open(join(path,f), 'w')
+        data = head+'<body>'+buletin+lettre
+        file.write(data)
         file.close()
 
 
