@@ -32,7 +32,7 @@ def convert(pathDir,pathHTML,files):
 
 def process(neg,pos,neutre,success,path):
     #add CSS
-    css='''<style type="text/css">
+    css=r'''<style type="text/css">
     .neg-5{background: rgb(255, 0, 0)}
     .neg-4{background: rgb(255, 60, 60)}
     .neg-3{background: rgb(255, 120, 120)}
@@ -48,35 +48,41 @@ def process(neg,pos,neutre,success,path):
     for f in success:
         print(join(path,f))
         file = open(join(path,f), 'r')
-        content = file.read()
-        re.sub('<style type="text/css">',css,content)
-        data = content.split('Projet de formation motivé')[0]
-        print(data)
+        doc = file.read()
+
+        content = doc.split('<body>')[1]
+
+        head = doc.split('<body>')[0]
+        head = re.sub(r'<style type="text/css">', css, head)
+
+
+        buletin = content.split('Projet de formation motivé')[0]
+        print(buletin)
         lettre = 'Projet de formation motivé'+'Projet de formation motivé'.join(content.split('Projet de formation motivé')[1:])
 
         for i,n in enumerate(neg):
 
             print(n)
-            find = re.findall(r"\b"+n[0]+r"\b", data ,flags=re.IGNORECASE)
+            find = re.findall(r"\b"+n[0]+r"\b", buletin ,flags=re.IGNORECASE)
 
             for fi in find:
-                match = re.subn(r'\b'+fi+r'\b', '<span class="neg-'+str(n[1])+'">'+fi+'</span>', data,flags=re.IGNORECASE)
-                data = match[0]
+                match = re.subn(r'\b'+fi+r'\b', '<span class="neg-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
+                buletin = match[0]
                 print(n,match[1])
 
         for i,n in enumerate(pos):
 
             print(n)
-            find = re.findall(r"\b"+n[0]+r"\b", data ,flags=re.IGNORECASE)
+            find = re.findall(r"\b"+n[0]+r"\b", buletin ,flags=re.IGNORECASE)
 
             for fi in find:
-                match = re.subn(r'\b'+fi+r'\b', '<span class="pos-'+str(n[1])+'">'+fi+'</span>', data,flags=re.IGNORECASE)
-                data = match[0]
-                print(n,match[1])
+                match = re.subn(r'\b'+fi+r'\b', '<span class="pos-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
+                buletin = match[0]
+                print(fi,match[1])
 
         file.close()
         file = open(join(path,f), 'wt')
-        file.write(data+lettre)
+        file.write(head+'<body>'+buletin+lettre)
         file.close()
 
 
