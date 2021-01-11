@@ -1,41 +1,41 @@
 à approfondir	1
 à revoir	2
 abandonner	2
-abscence[^ ]?	4
+abscence[^< ]?	4
 absent\w*	4
-agité[^ ]?[^ ]?	5
-agitation[^ ]?	5
-amusement[^ ]?	5
+agité[^< ]?[^< ]?	5
+agitation[^< ]?	5
+amusement[^< ]?	5
 attention	1
 aucun	1
-avertissement[^ ]?	5
+avertissement[^< ]?	5
 baisse\w*	1
 bavard\w*	4
-canalise[^ ]?	2
+canalise[^< ]?	2
 catastrophique	4
 concentr\w*	2
 contrasté\w*	1
 davantage	1
-décevant[^ ]?	2
-décontracté[^ ]?	4
+décevant[^< ]?	2
+décontracté[^< ]?	4
 déconcentr\w*	3
 démission	3
 déraper	4
 désagréable	4
 désinvolt\w*	5
 désirer	2
-doi[^ ]	1
+doi[^< ]	1
 devez	1
 difficultés	1
-dilletant[^ ]?	5
-discussion[^ ]?	3
-discute[^ ]?	3
+dilletant[^< ]?	5
+discussion[^< ]?	3
+discute[^< ]?	3
 dispers\w*	4
-dissipé[^ ]?	5
+dissipé[^< ]?	5
 dissipation	5
-distraction[^ ]?	5
+distraction[^< ]?	5
 distrai\w*	5
-divertissement[^ ]?	5
+divertissement[^< ]?	5
 doit s'investir	1
 dommage	1
 dormir	5
@@ -45,15 +45,15 @@ en chute	2
 en dents de scie	1
 en-deçà	1
 être plus attentif	4
-fragile[^ ]?	1
-fragilité[^ ]?	1
+fragile[^< ]?	1
+fragilité[^< ]?	1
 hétérogène	1
 il faut réagir	3
-indispensable[^ ]?	3
+indispensable[^< ]?	3
 impérativement	3
-inadapté[^ ]?[^ ]?	5
-inacceptable[^ ]?	5
-inquiétant[^ ]?[^ ]?	3
+inadapté[^< ]?[^< ]?	5
+inacceptable[^< ]?	5
+inquiétant[^< ]?[^< ]?	3
 insolen\w*	5
 insuffisant\w*	3
 insupportable	5
@@ -61,7 +61,7 @@ intensifie	2
 intensifier	2
 irrégulier\w*	2
 juste\w*	1
-lacune[^ ]?	1
+lacune[^< ]?	1
 manque	1
 manque de travail	3
 mise en garde	4
@@ -75,12 +75,12 @@ nonchalance	5
 nuisent	3
 pas de travail	5
 perte de motivation	3
-peu motivé[^ ]?	3
-pénible[^ ]?	5
+peu motivé[^< ]?	3
+pénible[^< ]?	5
 pitre	5
 plus attentif	3
-problème[^ ]?	2
-puérile[^ ]?	5
+problème[^< ]?	2
+puérile[^< ]?	5
 réagir	3
 regrettable	3
 relâch\w*	3
@@ -98,4 +98,4 @@ s'implique\w*	2
 s'investir davantage	2
 travail superficiel	3
 travailler davantage	3
-très insuffisant[^ ]?	3
+très insuffisant[^< ]?	3
