@@ -1,53 +1,54 @@
 a su	2
 actif	3
 active	3
-agréable[^ ]?	2
+agréable[^< ]?	2
 amélioration	2
-appliqué[^ ]?	3
+appliqué[^< ]?	3
 appréciable	3
 attentif	3
 attentive	3
+Bon[^< ]?[^< ]?[^< ]?	3
 bonne volonté	3
-calme[^ ]?	2
-capacité[^ ]?	1
+calme[^< ]?	2
+capacité[^< ]?	1
 compliments	4
 comportement exemplaire	4
 comportement sérieux	4
 continu\w*	2
-convenable[^ ]?	2
+convenable[^< ]?	2
 de réels progrès	2
 dynamique	2
 efficace	2
 élève sérieux	3
 en hausse	2
-encouragement[^ ]?	4
+encouragement[^< ]?	4
 ensemble correct	2
 enthousiasme	2
-excellent[^ ]?[^ ]?	4
+excellent[^< ]?[^< ]?	4
 félicitons	5
 félicitations	5
 FELICITATIONS	5
-homogène[^ ]?	2
-intéressé[^ ]?	3
+homogène[^< ]?	2
+intéressé[^< ]?	3
 irréprochable	3
 mature	3
 méthodique	2
 moteur	4
 motrice	4
-motivé[^ ]?	1
-persévérant[^ ]?	1
-pertinent[^ ]?[^ ]?	1
-positi[^ ]?[^ ]?	3
+motivé[^< ]?	1
+persévérant[^< ]?	1
+pertinent[^< ]?[^< ]?	1
+positi[^< ]?[^< ]?	3
 progrès	1
-qualité[^ ]?	2
-satisfaisant[^ ]?[^ ]?	3
+qualité[^< ]?	2
+satisfaisant[^< ]?[^< ]?	3
 sérieuse	3
 sérieux	3
 studieuse	3
 studieux	3
 Tableau d'honneur	4
 travail sérieux	3
-travailleu[^ ][^ ]?	3
+travailleu[^< ][^< ]?	3
 très bon	4
 volontaire	3
 vos efforts	1
