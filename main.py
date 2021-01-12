@@ -56,9 +56,17 @@ def process(neg,pos,neutre,success,path):
 
         head = doc.split('<body>')[0]
         head = re.sub(r'<style type="text/css">', css, head,1)
-        buletin = content.split('ciations des professeurs :')[0]
+        apreciation = content.split('ciations des professeurs :')
+        if len(apreciation)>1:
+            buletin = content.split('ciations des professeurs :')[0]
+            lettre = 'ciations des professeurs :' + 'ciations des professeurs :'.join(content.split('ciations des professeurs :')[1:])
+        else:
+            buletin = content.split('Projet de formation motiv')[0]
+            lettre = 'Projet de formation motiv' + 'Projet de formation motiv'.join(content.split('Projet de formation motiv')[1:])
+
+
         buletin = buletin.replace("&apos;","'")
-        lettre = 'ciations des professeurs :'+'ciations des professeurs :'.join(content.split('ciations des professeurs :')[1:])
+
 
         success[i]['word']=[]
         success[i]['pos'] = 0
