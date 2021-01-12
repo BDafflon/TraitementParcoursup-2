@@ -4,7 +4,7 @@ import re
 import subprocess
 from os import listdir
 from os.path import isfile, join
-
+import chardet
 
 def parseDir(dir):
     onlyfiles = [{'file':f} for f in listdir(dir) if join(dir,f).lower().endswith('pdf') and isfile(join(dir, f))]
@@ -19,6 +19,7 @@ def convert(pathDir,pathHTML,files):
     error = []
     for file in files:
         f=file['file']
+        print("Convert ",join(pathHTML,f[:-3])+"html")
         file_exists = os.path.isfile(join(pathHTML,f[:-3])+"html")
         if file_exists:
             success.append({'file':f[:-3] + "html"})
@@ -47,15 +48,17 @@ def process(neg,pos,neutre,success,path):
     '''
     for i,file in enumerate(success):
         f=file["file"]
-        file = open(join(path,f),mode='r')
+        print("Coloration ", join(path,f))
+        file = open(join(path,f),mode='r',encoding="utf8")
         doc = file.read()
 
         content = doc.split('<body>')[1]
 
         head = doc.split('<body>')[0]
         head = re.sub(r'<style type="text/css">', css, head,1)
-        buletin = content.split('Projet de formation motiv')[0]
-        lettre = 'Projet de formation motiv'+'Projet de formation motiv'.join(content.split('Projet de formation motiv')[1:])
+        buletin = content.split('ciations des professeurs :')[0]
+        buletin = buletin.replace("&apos;","'")
+        lettre = 'ciations des professeurs :'+'ciations des professeurs :'.join(content.split('ciations des professeurs :')[1:])
 
         success[i]['word']=[]
         success[i]['pos'] = 0
@@ -80,7 +83,7 @@ def process(neg,pos,neutre,success,path):
                 success[i]['pos'] += n[1]
 
         file.close()
-        file = open(join(path,f), 'w')
+        file = open(join(path,f), mode='w',encoding="utf8")
         data = head+'<body>'+buletin+lettre
         file.write(data)
         file.close()
@@ -138,6 +141,7 @@ if __name__ == '__main__':
     pos = [[f.split('\t')[0], int(f.split("\t")[1])] for f in posFile.readlines()]
     neutre = [[f.split('\t')[0], int(f.split("\t")[1])] for f in neutreFile.readlines()]
 
+    print(neg)
     files = parseDir(pathDir)
 
     print(historique)
