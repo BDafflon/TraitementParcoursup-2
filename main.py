@@ -58,6 +58,8 @@ def process(neg,pos,neutre,success,path):
         lettre = 'Projet de formation motiv'+'Projet de formation motiv'.join(content.split('Projet de formation motiv')[1:])
 
         success[i]['word']=[]
+        success[i]['pos'] = 0
+        success[i]['neg']=0
         for n in neg:
 
             find = re.findall(r"\b"+n[0]+r"\b", buletin ,flags=re.IGNORECASE)
@@ -65,6 +67,7 @@ def process(neg,pos,neutre,success,path):
             for fi in find:
                 match = re.subn(r'\b'+fi+r'\b', '<span class="neg-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
                 buletin = match[0]
+                success[i]['neg']+=n[1]
 
 
         for n in pos:
@@ -74,7 +77,7 @@ def process(neg,pos,neutre,success,path):
             for fi in find:
                 match = re.subn(r'\b'+fi+r'\b', '<span class="pos-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
                 buletin = match[0]
-
+                success[i]['pos'] += n[1]
 
         file.close()
         file = open(join(path,f), 'w')
@@ -84,16 +87,32 @@ def process(neg,pos,neutre,success,path):
     return success
 
 
-def log(data,path):
-    csv=";"
+def log(data,path,historique):
+    csv="file;Rep1;Rep2;Rep3;Positif;Negatif;"
 
     for w in data[0]['word']:
         csv+=w[0]+";"
 
     csv+="\n"
+
     for d in data:
         print(d)
-        csv+=d['file']+";"
+        num = re.search('-N(.*).html', d['file'], re.IGNORECASE)
+        if num :
+            csv +=num.group(1)+";"
+        else:
+            csv+=d['file']+";"
+
+        find=False
+        for h in historique:
+            if h[0] in d['file']:
+                csv +=h[1]+";"+h[2]+";"+h[3]+";"
+                find=True
+        if not find:
+            csv += ";;;"
+
+        csv += str(d['pos']) + ";"
+        csv += str(d['neg']) + ";"
         for w in d['word']:
             csv+=str(w[1])+";"
         csv += "\n"
@@ -112,13 +131,16 @@ if __name__ == '__main__':
     negFile = open('input/negatif.txt', 'r')
     posFile = open('input/positif.txt', 'r')
     neutreFile = open('input/blue.txt','r')
+    historiqueFile = open('input/historique.csv','r')
 
+    historique = [f.split(";") for f in historiqueFile.read().split('\n')]
     neg = [[f.split('\t')[0], int(f.split("\t")[1])] for f in negFile.readlines()]
     pos = [[f.split('\t')[0], int(f.split("\t")[1])] for f in posFile.readlines()]
     neutre = [[f.split('\t')[0], int(f.split("\t")[1])] for f in neutreFile.readlines()]
 
     files = parseDir(pathDir)
 
+    print(historique)
     success,error=convert(pathDir,pathHTML,files)
     success=process(neg,pos,neutre,success,pathHTML)
-    log(success,pathHTML)
+    log(success,pathHTML,historique)
