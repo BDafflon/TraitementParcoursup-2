@@ -76,8 +76,6 @@ def process(neg,pos,neutre,success,path):
             find = re.findall(r"\b"+n[0]+r"\b", buletin ,flags=re.IGNORECASE)
             success[i]['word'].append([n[0],len(find)])
             for fi in find:
-                print(fi,str(n[1]))
-
                 match = re.subn(r'\b'+fi+r'\b', '<span class="neg-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
                 buletin = match[0]
                 success[i]['neg']+=n[1]
@@ -108,7 +106,6 @@ def log(data,path,historique):
     csv+="\n"
 
     for d in data:
-        print(d)
         num = re.search('-N(.*).html', d['file'], re.IGNORECASE)
         if num :
             csv +=num.group(1)+";"
@@ -128,28 +125,43 @@ def log(data,path,historique):
         for w in d['word']:
             csv+=str(w[1])+";"
         csv += "\n"
-    print(csv+"\n")
+
     f = open(join(path,"indicateur.csv"), mode='w',encoding="utf8")
     f.write(csv)
     f.close()
 
-def datacleaning(file):
-    fileData = open(file, 'r')
+def datacleaning(path,file):
+    fileData = open(join(path,file), 'r')
     data = [f.split(";")[1:] for f in fileData.read().split('\n')[1:-1]]
     dataC=[]
     for d in data:
         if d[0]=="Oui" or d[2]=='Oui':
-            d=[1]+d[3:]
+            d=[1]+d[3:-1]
         else:
-            d = [0] + d[3:]
+            d = [0] + d[3:-1]
+
 
         d = [int(i) for i in d]
-        N=5
+        N=20
         res = sorted(range(len(d)), key = lambda sub: d[sub])[-N:]
-        resD=d[0:1]+[[d[i]]+[i] for i in res]
-        print(resD)
-        dataC+=[d]
-    print(dataC)
+
+        resD = d[0:1]
+        for n in res:
+            resD.append(d[n])
+            resD.append(n)
+
+        dataC+=[resD]
+
+    csv="res;"
+    for i in range(0,N*2+1):
+        csv+=str(i)+";"
+
+    csv +='\n'
+    for l in dataC:
+        csv+='; '.join(map(str, l)) + '\n'
+    f = open(join(path, "dataCleaning.csv"), mode='w', encoding="utf8")
+    f.write(csv)
+    f.close()
 
 
 if __name__ == '__main__':
@@ -167,11 +179,11 @@ if __name__ == '__main__':
     pos = [[f.split('\t')[0], int(f.split("\t")[1])] for f in posFile.readlines()]
     neutre = [[f.split('\t')[0], int(f.split("\t")[1])] for f in neutreFile.readlines()]
 
-    print(neg)
+
     files = parseDir(pathDir)
 
-    print(historique)
+    #print(historique)
     success,error=convert(pathDir,pathHTML,files)
     success=process(neg,pos,neutre,success,pathHTML)
     log(success,pathHTML,historique)
-    #datacleaning(join(pathHTML,'indicateur.csv'))
+    datacleaning(pathHTML,'indicateur.csv')
