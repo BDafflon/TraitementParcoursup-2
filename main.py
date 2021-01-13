@@ -76,6 +76,8 @@ def process(neg,pos,neutre,success,path):
             find = re.findall(r"\b"+n[0]+r"\b", buletin ,flags=re.IGNORECASE)
             success[i]['word'].append([n[0],len(find)])
             for fi in find:
+                print(fi,str(n[1]))
+
                 match = re.subn(r'\b'+fi+r'\b', '<span class="neg-'+str(n[1])+'">'+fi+'</span>', buletin,flags=re.IGNORECASE)
                 buletin = match[0]
                 success[i]['neg']+=n[1]
@@ -96,7 +98,6 @@ def process(neg,pos,neutre,success,path):
         file.write(data)
         file.close()
     return success
-
 
 def log(data,path,historique):
     csv="file;Rep1;Rep2;Rep3;Positif;Negatif;"
@@ -128,10 +129,27 @@ def log(data,path,historique):
             csv+=str(w[1])+";"
         csv += "\n"
     print(csv+"\n")
-    f = open(join(path,"indicateur.csv"), "w")
+    f = open(join(path,"indicateur.csv"), mode='w',encoding="utf8")
     f.write(csv)
     f.close()
 
+def datacleaning(file):
+    fileData = open(file, 'r')
+    data = [f.split(";")[1:] for f in fileData.read().split('\n')[1:-1]]
+    dataC=[]
+    for d in data:
+        if d[0]=="Oui" or d[2]=='Oui':
+            d=[1]+d[3:]
+        else:
+            d = [0] + d[3:]
+
+        d = [int(i) for i in d]
+        N=5
+        res = sorted(range(len(d)), key = lambda sub: d[sub])[-N:]
+        resD=d[0:1]+[[d[i]]+[i] for i in res]
+        print(resD)
+        dataC+=[d]
+    print(dataC)
 
 
 if __name__ == '__main__':
@@ -156,3 +174,4 @@ if __name__ == '__main__':
     success,error=convert(pathDir,pathHTML,files)
     success=process(neg,pos,neutre,success,pathHTML)
     log(success,pathHTML,historique)
+    #datacleaning(join(pathHTML,'indicateur.csv'))
