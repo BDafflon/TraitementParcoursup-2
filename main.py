@@ -5,10 +5,12 @@ import subprocess
 from os import listdir
 from os.path import isfile, join
 import chardet
+import numpy as np
 
-def parseDir(dir):
+def parseDir(dir,export):
     onlyfiles = [{'file':f} for f in listdir(dir) if join(dir,f).lower().endswith('pdf') and isfile(join(dir, f))]
-    return onlyfiles
+    onlyfilesHTML = [{'file': f} for f in listdir(export) if join(export, f).lower().endswith('html') and isfile(join(export, f))]
+    return onlyfiles,onlyfilesHTML
 
 def convert(pathDir,pathHTML,files):
     dir_existe = os.path.isdir(pathHTML)
@@ -143,18 +145,23 @@ def datacleaning(path,file):
 
         d = [int(i) for i in d]
         N=20
-        res = sorted(range(len(d)), key = lambda sub: d[sub])[-N:]
+        a = np.array(d[3:])
+        ind = np.argpartition(a, -N)[-N:]
+        oc =a[ind]
+        print(ind,oc)
 
-        resD = d[0:1]
-        for n in res:
-            resD.append(d[n])
+
+        resD = d[0:3]
+
+        for i,n in enumerate(ind):
             resD.append(n)
+            resD.append(oc[i])
 
         dataC+=[resD]
 
-    csv="res;"
-    for i in range(0,N*2+1):
-        csv+=str(i)+";"
+    csv="res;pos;neg;"
+    for i in range(0,N):
+        csv+="mot;oc;"
 
     csv +='\n'
     for l in dataC:
@@ -180,10 +187,10 @@ if __name__ == '__main__':
     neutre = [[f.split('\t')[0], int(f.split("\t")[1])] for f in neutreFile.readlines()]
 
 
-    files = parseDir(pathDir)
+    files,htmls = parseDir(pathDir,pathHTML)
 
     #print(historique)
-    success,error=convert(pathDir,pathHTML,files)
-    success=process(neg,pos,neutre,success,pathHTML)
-    log(success,pathHTML,historique)
+    #success,error=convert(pathDir,pathHTML,files)
+    #success=process(neg,pos,neutre,htmls,pathHTML)
+    #log(success,pathHTML,historique)
     datacleaning(pathHTML,'indicateur.csv')
