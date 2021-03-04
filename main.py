@@ -6,6 +6,8 @@ from os import listdir
 from os.path import isfile, join
 import chardet
 import numpy as np
+import json
+from string import digits
 
 def parseDir(dir,export):
     onlyfiles = [{'file':f} for f in listdir(dir) if join(dir,f).lower().endswith('pdf') and isfile(join(dir, f))]
@@ -144,24 +146,16 @@ def datacleaning(path,file):
 
 
         d = [int(i) for i in d]
-        N=20
-        a = np.array(d[3:])
-        ind = np.argpartition(a, -N)[-N:]
-        oc =a[ind]
-        print(ind,oc)
+        N=100
 
+        resD = d
 
-        resD = d[0:3]
-
-        for i,n in enumerate(ind):
-            resD.append(n)
-            resD.append(oc[i])
 
         dataC+=[resD]
 
     csv="res;pos;neg;"
     for i in range(0,N):
-        csv+="mot;oc;"
+        csv+="mot"+str(i)+";"
 
     csv +='\n'
     for l in dataC:
@@ -169,6 +163,115 @@ def datacleaning(path,file):
     f = open(join(path, "dataCleaning.csv"), mode='w', encoding="utf8")
     f.write(csv)
     f.close()
+
+
+def createVocable(path,historique):
+    print("Creation corpus")
+    corpusPositif=""
+    corpusNegatif=""
+    onlyfilesHTML = [{'file': f} for f in listdir(path) if join(path, f).lower().endswith('html') and isfile(join(path, f))]
+    print("nombre de fichier ",len(onlyfilesHTML))
+    fullBuletinTab = []
+    tags=[" dossier ° dut génie mécanique page " ," dossier n ° dut génie mécanique page ","dossier n ° dut génie mécanique page"," : matière trimestre ème trimestre ème trimestre "," bas"," dossier n° - dut - génie mécanique page ", "projet formation motiv"," : matière trimestre ème trimestre ",]
+
+    for i,file in enumerate(onlyfilesHTML):
+        if i>10000:
+            break
+        f=file["file"]
+
+
+        print(f)
+        file = open(join(path,f),mode='r',encoding="utf8")
+        doc = file.read()
+
+        content = doc.split('<body>')[1]
+
+        buletin=""
+        buletin = "Bulletins scolaires de l'année".join(content.split("Bulletins scolaires de l'année")[1:])
+
+        buletin = buletin.split("Projet de formation")[0]
+
+        buletin = buletin.split("Appréciations des professeurs :")[0]
+
+        buletin = buletin.lower()
+
+        buletin = buletin.replace("&apos;"," ")
+        buletin = buletin.replace("'", " ")
+        buletin = buletin.replace("\.", " ")
+        buletin = buletin.replace("</div", " . </div")
+
+        buletin = cleanhtml(buletin)
+
+
+        buletin = removeStopwords(buletin, stopwords)
+
+        buletin = removeChar(buletin, ["\+","\(","\)","\*", ',',"/","_",'-'])
+
+        buletinTab = buletin.split("bulletins scolaires année")
+        print(len(buletinTab))
+
+        buletinTabSplit=[]
+        for b in buletinTab:
+            dictAnnee={}
+
+            annee = [int(i) for i in b.split(" : ")[0].split(" ") if i !=""]
+            dictAnnee["annee"]=annee
+
+            b = re.sub('\w+\d+ \d+\w+',"&&&",b.lower())
+            remove_digits = b.maketrans('', '', digits)
+            b = b.translate(remove_digits)
+            b = re.sub(' +', ' ', b.lower())
+            b = re.sub('\n', '.', b.lower())
+
+            findall = re.findall("(\. [^\.]+? &&&)",b)
+            for fi in findall:
+                if fi ==". &&& &&&":
+                    continue
+                print(fi)
+                b=re.sub(fi,"|||"+fi[1:],b)
+
+
+            b = re.sub("& &","",b)
+
+            b = re.sub("&&+","&&&",b)
+
+
+            dictAnnee["data"] = [ {'matiere':i.split("&&&")[0].replace('|',''),'commentaire':[x for x in ''.join(i.split("&&&")[1:]).split('.') if x not in tags and x!="" and x!=" "]} for i in b.split("|||") if i!=" " and i not in tags and i!="" and i[1]!="&"]
+            buletinTabSplit.append(dictAnnee)
+
+        for h in historique:
+            if h[0] in f :
+                if h[1]=='Oui' or h[3]=='Oui':
+                    fullBuletinTab.append({'file':f,'data':buletinTabSplit,'results':'Oui'})
+                else:
+                    fullBuletinTab.append({'file':f,'data':buletinTabSplit,'results':'Non'})
+
+
+    with open('data.txt', 'w',encoding="utf8") as outfile:
+        json.dump(fullBuletinTab, outfile,ensure_ascii=False)
+
+    print("fin corpus")
+    return join(path, "corpus.txt")
+
+def removeChar(text,rm):
+    for w in rm:
+        text = re.sub(w, ' ', text.lower())
+    text = re.sub(' +', ' ', text.lower())
+    return text
+
+def cleanhtml(raw_html):
+  cleanr = re.compile('<.*?>')
+  cleantext = re.sub(cleanr, ' ', raw_html)
+  cleantext = re.sub(' +', ' ', cleantext)
+
+  return cleantext
+
+def removeStopwords(text,words):
+    for w in words:
+        text = re.sub(r'\b'+w.lower()+r'\b', ' ', text.lower())
+    text = re.sub(' +', ' ', text)
+    return text
+
 
 
 if __name__ == '__main__':
@@ -180,17 +283,20 @@ if __name__ == '__main__':
     posFile = open('input/positif.txt', 'r')
     neutreFile = open('input/blue.txt','r')
     historiqueFile = open('input/historique.csv','r')
+    stopwordFile = open('input/stopword.txt','r')
 
     historique = [f.split(";") for f in historiqueFile.read().split('\n')]
     neg = [[f.split('\t')[0], int(f.split("\t")[1])] for f in negFile.readlines()]
     pos = [[f.split('\t')[0], int(f.split("\t")[1])] for f in posFile.readlines()]
     neutre = [[f.split('\t')[0], int(f.split("\t")[1])] for f in neutreFile.readlines()]
+    stopwords = [f for f in stopwordFile.read().split('\n')]
 
 
-    files,htmls = parseDir(pathDir,pathHTML)
+    #files,htmls = parseDir(pathDir,pathHTML)
 
     #print(historique)
     #success,error=convert(pathDir,pathHTML,files)
     #success=process(neg,pos,neutre,htmls,pathHTML)
     #log(success,pathHTML,historique)
-    datacleaning(pathHTML,'indicateur.csv')
+    corpusPath = createVocable(pathHTML,historique)
+    #datacleaning(pathHTML,'indicateur.csv')
